@@ -103,7 +103,7 @@ $ godoc regexp | grep parse
 ```
 If all the doc comments in the package began, "This function...", grep wouldn't help you remember the name. But because the package starts each doc comment with the name, you'd see something like this, which recalls the word you're looking for.
 
-若包中的所有文档注释都以 “此函数…” 开头，grep 就无法帮你记住此名称。 但由于每个包的文档注释都以其名称开头，你就能看到这样的内容，它能显示你正在寻找的词语。
+若包中的所有文档注释都以 “This function...” 开头，grep 就无法帮你记住此名称。 但由于每个包的文档注释都以其名称开头，你就能看到这样的内容，它能显示你正在寻找的词语。
 
 ```go
 $ godoc regexp | grep parse
