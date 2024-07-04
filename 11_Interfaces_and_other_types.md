@@ -355,7 +355,7 @@ func (f HandlerFunc) ServeHTTP(w ResponseWriter, req *Request) {
 ```
 HandlerFunc is a type with a method, ServeHTTP, so values of that type can serve HTTP requests. Look at the implementation of the method: the receiver is a function, f, and the method calls f. That may seem odd but it's not that different from, say, the receiver being a channel and the method sending on the channel.
 
-HandlerFunc 是个具有 ServeHTTP 方法的类型， 因此该类型的值就能处理 HTTP 请求。我们来看看该方法的实现：接收者是一个函数 f，而该方法调用 f。这看起来很奇怪，但不必大惊小怪， 区别在于接收者变成了一个信道，而方法通过该信道发送消息。
+HandlerFunc 是个具有 ServeHTTP 方法的类型， 因此该类型的值就能处理 HTTP 请求。我们来看看该方法的实现：接收者是一个函数 f，而该方法调用 f。这看起来很奇怪， 但是跟前面的例子没有太大区别： 接收者是一个信道， （ServeHTTP）方法往该信道发消息。
 
 To make ArgServer into an HTTP server, we first modify it to have the right signature.
 
