@@ -32,7 +32,7 @@ One way to think about this model is to consider a typical single-threaded progr
 
 They're called goroutines because the existing terms—threads, coroutines, processes, and so on—convey inaccurate connotations. A goroutine has a simple model: it is a function executing concurrently with other goroutines in the same address space. It is lightweight, costing little more than the allocation of stack space. And the stacks start small, so they are cheap, and grow by allocating (and freeing) heap storage as required.
 
-我们称之为 ** goroutine ** ，是因为现有的术语—线程、协程、进程等等—无法准确传达它的含义。 Goroutine 具有简单的模型：它是与其它 goroutine 并发运行在同一地址空间的函数。它是轻量级的， 所有消耗几乎就只有栈空间的分配。而且栈最开始是非常小的，所以它们很廉价， 仅在需要时才会随着堆空间的分配（和释放）而变化。
+我们称之为 **goroutine** ，是因为现有的术语—线程、协程、进程等等—无法准确传达它的含义。 Goroutine 具有简单的模型：它是与其它 goroutine 并发运行在同一地址空间的函数。它是轻量级的， 所有消耗几乎就只有栈空间的分配。而且栈最开始是非常小的，所以它们很廉价， 仅在需要时才会随着堆空间的分配（和释放）而变化。
 
 Goroutines are multiplexed onto multiple OS threads so if one should block, such as while waiting for I/O, others continue to run. Their design hides many of the complexities of thread creation and management.
 
@@ -286,7 +286,7 @@ func Serve(clientRequests chan *Request, quit chan bool) {
 
 One of the most important properties of Go is that a channel is a first-class value that can be allocated and passed around like any other. A common use of this property is to implement safe, parallel demultiplexing.
 
-Go 最重要的特性就是信道是一等值，它可以被分配并像其它值到处传递。 这种特性通常被用来实现安全、并行的多路分解。
+Go语言最重要的特性之一是，通道是一种一等公民的值，可以像其他任何值一样被分配和传递。这种特性通常被用来实现安全、并行的多路分解。
 
 In the example in the previous section, handle was an idealized handler for a request but we didn't define the type it was handling. If that type includes a channel on which to reply, each client can provide its own path for the answer. Here's a schematic definition of type Request.
 
@@ -344,7 +344,7 @@ func handle(queue chan *Request) {
 ```
 There's clearly a lot more to do to make it realistic, but this code is a framework for a rate-limited, parallel, non-blocking RPC system, and there's not a mutex in sight.
 
-要使其实际可用还有很多工作要做，这些代码仅能实现一个速率有限、并行、非阻塞 RPC 系统的框架，而且它并不包含互斥锁。
+要使其实际可用还有很多工作要做，这些代码仅能实现一个有速率限制、并行、非阻塞的 RPC 系统的框架，而且它并不包含互斥锁。
 
 ### Parallelization
 
@@ -372,7 +372,7 @@ func (v Vector) DoSome(i, n int, u Vector, c chan int) {
 ```go
 type Vector []float64
 
-// 将此操应用至 v[i], v[i+1] ... 直到 v[n-1]
+// 将此操作应用至 v[i], v[i+1] ... 直到 v[n-1]
 func (v Vector) DoSome(i, n int, u Vector, c chan int) {
 	for ; i < n; i++ {
 		v[i] += u.Op(v[i])
@@ -428,7 +428,7 @@ Be sure not to confuse the ideas of concurrency—structuring a program as indep
 
 The tools of concurrent programming can even make non-concurrent ideas easier to express. Here's an example abstracted from an RPC package. The client goroutine loops receiving data from some source, perhaps a network. To avoid allocating and freeing buffers, it keeps a free list, and uses a buffered channel to represent it. If the channel is empty, a new buffer gets allocated. Once the message buffer is ready, it's sent to the server on serverChan.
 
-并发编程的工具可以用来很容易的表达一些并非是并发的思想。这里有个提取自 RPC 包的例子。 客户端 Go 程从某些来源，可能是网络中循环接收数据。为避免分配和释放缓冲区， 它保存了一个空闲链表，使用一个带缓冲信道表示。若信道为空，就会分配新的缓冲区。 一旦消息缓冲区就绪，它将通过 serverChan 被发送到服务器。
+并发编程的工具可以用来很容易的表达一些并非是并发的思想。这里有个提取自 RPC 包的例子。 客户端 Go 程从某些来源，可能是网络中循环接收数据。为避免分配和释放缓冲区， 它保存了一个空闲列表，使用一个带缓冲信道表示。若信道为空，就会分配新的缓冲区。 一旦消息缓冲区就绪，它将通过 serverChan 被发送到服务器。
 
 ```go
 var freeList = make(chan *Buffer, 100)
